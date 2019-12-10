@@ -13,8 +13,13 @@ public class ConfigReader {
 
     public static String getPropertyvalue(String property) throws IOException {
         Properties prop = new Properties();
-        prop.load(new FileInputStream(System.getProperty("user.dir")+"/src/test/resources/cucumber.properties"));
+        prop.load(new FileInputStream(System.getProperty("user.dir") + "/src/test/resources/cucumber.properties"));
+        String propertyFileValue = prop.getProperty(property);
+        String systemValue = System.getProperty(property);
 
-        return prop.getProperty(property);
+        if (systemValue != null) {
+            propertyFileValue = systemValue;
+        }
+        return propertyFileValue;
     }
 }
